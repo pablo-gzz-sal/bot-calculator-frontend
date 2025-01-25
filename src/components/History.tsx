@@ -3,15 +3,24 @@ import { List } from "antd";
 import IHistoryItem from "../models/HistoryItem.ts";
 
 const HistoryList: React.FC<IHistoryItem[]> = ({ history }) => {
-  <List
-    bordered
-    dataSource={history}
-    renderItem={(item: IHistoryItem) => {
-      <List.Item>
-        {item.command}: {item.result}
-      </List.Item>;
-    }}
-  />;
+  console.log(history);
+
+  return (
+    <>
+      <List
+        bordered
+        dataSource={history}
+        renderItem={(item: IHistoryItem) => (
+          <List.Item>
+            <div>
+              <strong>Command:</strong> {item.command} <br />
+              <strong>Result:</strong> {item.result} <br />
+            </div>
+          </List.Item>
+        )}
+      />
+    </>
+  );
 };
 
-export default HistoryList
+export default HistoryList;
