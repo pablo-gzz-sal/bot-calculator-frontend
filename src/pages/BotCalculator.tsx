@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ChatInput from "../components/ChatInput";
-import HistoryList from "../components/History";
-import IHistoryItem from "../models/HistoryItem";
-import { sendUserCommand } from "../services/ChatInput.service";
-import { getHistory } from "../services/history.service";
+import ChatInput from "../components/ChatInput.tsx";
+import History from "../components/History.tsx";
+import IHistoryItem from "../models/HistoryItem.ts";
+import { sendUserCommand } from "../services/ChatInput.service.ts";
+import { getHistory } from "../services/history.service.ts";
 
 const BotCalculator: React.FC = () => {
   const [historyList, setHistoryList] = useState<IHistoryItem[]>([]);
@@ -26,7 +26,7 @@ const BotCalculator: React.FC = () => {
       <h1>Bot Calculator</h1>
       <ChatInput onSend={handleUserCommand} />
       <h2>History List</h2>
-      <HistoryList history={historyList} />
+      <History history={historyList} />
     </div>
   );
 };

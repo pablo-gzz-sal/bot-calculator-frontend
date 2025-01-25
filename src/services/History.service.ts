@@ -1,5 +1,5 @@
 import axios from "axios";
-import IHistoryItem from "../models/HistoryItem";
+import IHistoryItem from "../models/HistoryItem.ts";
 
 const baseUrl = "http://localhost:4000/";
 

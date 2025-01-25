@@ -1,6 +1,6 @@
 import React from "react";
 import { List } from "antd";
-import IHistoryItem from "../models/HistoryItem";
+import IHistoryItem from "../models/HistoryItem.ts";
 
 const HistoryList: React.FC<IHistoryItem[]> = ({ history }) => {
   <List

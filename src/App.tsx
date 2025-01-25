@@ -1,9 +1,10 @@
 import React from 'react';
-import ChatInput from './components/ChatInput.tsx';
+import BotCalculator from './pages/BotCalculator.tsx';
 
 function App() {
   return (
     <div className="App">
+      <BotCalculator />
     </div>
   );
 }
