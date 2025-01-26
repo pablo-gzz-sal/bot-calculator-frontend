@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { List, Button } from "antd";
 import IHistoryItem from "../models/HistoryItem.ts";
 import { formatDate } from "../utils/DateUtils.ts";
