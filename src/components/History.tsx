@@ -11,7 +11,7 @@ const HistoryList: React.FC<IHistoryItem[]> = ({
   return (
     <>
       <Button type="primary" onClick={onHandleLoadHistory}>
-        {history.length !== 0 ? "Hide History" : "Show History"}
+        {showHistory ? "Hide History" : "Show History"}
       </Button>
       {showHistory && (
         <List
