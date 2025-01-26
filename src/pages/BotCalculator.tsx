@@ -5,32 +5,42 @@ import IHistoryItem from "../models/HistoryItem.ts";
 import { sendUserCommand } from "../services/ChatInput.service.ts";
 import { getHistory } from "../services/history.service.ts";
 import socket from "../services/Socket.service.ts";
-import '../styles/BotCalulator.css'
+import "../styles/BotCalulator.css";
+import { Button } from "antd";
 
 const BotCalculator: React.FC = () => {
   const [historyList, setHistoryList] = useState<IHistoryItem[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
-    const handleHistoryLoaded = (history: IHistoryItem[]) => {
-      setHistoryList(history);
-    };
-    socket.on("history_loaded", handleHistoryLoaded);
-
     const handleHistoryItem = (newItem: IHistoryItem) => {
       setHistoryList((oldList: IHistoryItem[]) => [newItem, ...oldList]);
     };
     socket.on("history_item", handleHistoryItem);
 
     return () => {
-      socket.off("history_loaded", handleHistoryLoaded);
       socket.off("history_item", handleHistoryItem);
     };
   }, []);
 
-  useEffect(() => {
-    socket.emit("load_history");
-    console.log("loading history");
-  }, []);
+  const handleLoadHistory = () => {
+    if (!showHistory) {
+      socket.emit("load_history");
+
+      const handleLoadedHistory = (historyList: IHistoryItem[]) => {
+        setHistoryList(historyList);
+      };
+
+      socket.on("history_loaded", handleLoadedHistory);
+      setShowHistory(true);
+      return () => {
+        socket.off("history_loaded", handleLoadedHistory);
+      };
+    } else {
+      setHistoryList([]);
+      setShowHistory(false);
+    }
+  };
 
   const handleUserCommand = async (command: string) => {
     try {
@@ -40,7 +50,7 @@ const BotCalculator: React.FC = () => {
         result,
         createdAt: new Date(),
       });
-      console.log(result);
+      socket.emit("load_history");
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +69,11 @@ const BotCalculator: React.FC = () => {
 
       <section className="history">
         <h2>History List</h2>
-        <HistoryList history={historyList} />
+        <HistoryList
+          history={historyList}
+          showHistory={showHistory}
+          onHandleLoadHistory={handleLoadHistory}
+        />
       </section>
     </div>
   );
