@@ -22,6 +22,7 @@
   .send-button {
     align-self: flex-end;
     transition: background-color 0.3s ease;
+    background-color: #2be2c7;
   }
   
   .send-button:hover {

@@ -55,24 +55,33 @@ const BotCalculator: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Bot Calculator</h1>
-        <p>A simple bot for performing calculations</p>
-      </header>
+    <div className="app-container">
+      <div className="calculator-container">
+        <header className="calculator-header">
+          <h1 className="calculator-title">Bot Calculator</h1>
+          <p className="calculator-subtitle">
+            A simple bot for performing calculations
+          </p>
+        </header>
 
-      <section className="chat-input">
-        <ChatInput onSend={handleUserCommand} />
-      </section>
+        <div className="calculator-content">
+          <section className="input-section">
+            <ChatInput onSend={handleUserCommand} />
+          </section>
 
-      <section className="history">
-        <h2>History List</h2>
-        <HistoryList
-          history={historyList}
-          showHistory={showHistory}
-          onHandleLoadHistory={handleLoadHistory}
-        />
-      </section>
+          <section className="history-section">
+            <div className="history-header">
+              <h2 className="history-title">History List</h2>
+              <div className="history-divider"></div>
+            </div>
+            <HistoryList
+              history={historyList}
+              showHistory={showHistory}
+              onHandleLoadHistory={handleLoadHistory}
+            />
+          </section>
+        </div>
+      </div>
     </div>
   );
 };
