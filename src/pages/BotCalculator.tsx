@@ -3,7 +3,7 @@ import ChatInput from "../components/ChatInput.tsx";
 import HistoryList from "../components/History.tsx";
 import IHistoryItem from "../models/HistoryItem.ts";
 import { sendUserCommand } from "../services/ChatInput.service.ts";
-import { getHistory } from "../services/history.service.ts";
+// import { getHistory } from "../services/history.service.ts";
 import socket from "../services/Socket.service.ts";
 import "../styles/BotCalulator.css";
 import { Button } from "antd";

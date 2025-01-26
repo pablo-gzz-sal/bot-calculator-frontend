@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
 import IChatInput from "../models/ChatInput";
+import '../styles/ChatInput.css'
 
 const ChatInput: React.FC<IChatInput> = ({ onSend }) => {
   const [inputCommand, setInputCommand] = useState("");
@@ -40,15 +41,15 @@ const ChatInput: React.FC<IChatInput> = ({ onSend }) => {
   };
 
   return (
-    <div>
+    <div className="chat-input-container">
       <Input
-        style={{ display: "flex", gap: "10px" }}
+        className="chat-input"
         placeholder="Enter a command"
         value={inputCommand}
         onChange={(e) => setInputCommand(e.target.value)}
       />
-      {error && <div style={{ color: "red", marginTop: "5px" }}>{error}</div>}
-      <Button type="primary" onClick={handleSendAction}>
+      {error && <div className="error-message">{error}</div>}
+      <Button type="primary" className="send-button" onClick={handleSendAction}>
         Send
       </Button>
     </div>
