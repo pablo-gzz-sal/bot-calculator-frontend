@@ -1,7 +1,7 @@
 interface IHistoryItem {
     command: string
     result: string
-    createdAt: Date
+    createdAt: string
 }
 
 export default IHistoryItem
