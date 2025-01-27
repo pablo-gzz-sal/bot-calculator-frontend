@@ -1,0 +1,34 @@
+.chat-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .chat-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .error-message {
+    color: #ff4d4f;
+    margin-top: 5px;
+    font-size: 0.9em;
+    animation: fadeIn 0.3s ease-in;
+  }
+  
+  .send-button {
+    align-self: flex-end;
+    transition: background-color 0.3s ease;
+  }
+  
+  .send-button:hover {
+    background-color: #40a9ff;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
