@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ChatInput from "../components/ChatInput.tsx";
 import HistoryList from "../components/History.tsx";
 import IHistoryItem from "../models/HistoryItem.ts";
@@ -14,20 +14,6 @@ const BotCalculator: React.FC = () => {
   const [historyList, setHistoryList] = useState<IHistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
-  /**
-   * Handles socket events for new history items.
-   * Adds new calculations to the history list.
-   */
-  useEffect(() => {
-    const handleHistoryItem = (newItem: IHistoryItem) => {
-      setHistoryList((oldList: IHistoryItem[]) => [newItem, ...oldList]);
-    };
-    socket.on("history_item", handleHistoryItem);
-
-    return () => {
-      socket.off("history_item", handleHistoryItem);
-    };
-  }, []);
 
   /**
    * Toggles history visibility and loads historical calculations.
@@ -60,12 +46,7 @@ const BotCalculator: React.FC = () => {
    */
   const handleUserCommand = async (command: string) => {
     try {
-      const result = await sendUserCommand(command);
-      socket.emit("send_history_item", {
-        command,
-        result,
-        createdAt: new Date(),
-      });
+      await sendUserCommand(command);
       socket.emit("load_history");
     } catch (error) {
       console.error(error);
