@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
 import IChatInput from "../models/ChatInput";
-import '../styles/ChatInput.css'
+import "../styles/ChatInput.css";
+
+/**
+ChatInput Component
+A provides a user interface for entering and validating mathematical expressions.
+Supports basic arithmetic operations (+, -, *, /) and validates input syntax.
+*/
 
 const ChatInput: React.FC<IChatInput> = ({ onSend }) => {
   const [inputCommand, setInputCommand] = useState("");
@@ -9,10 +15,15 @@ const ChatInput: React.FC<IChatInput> = ({ onSend }) => {
 
   const isValidInputCommand = (command: string) => {
     const mathRegex = /^[0-9+\-*/().^\s]+$/;
-
     return mathRegex.test(command);
   };
 
+
+  /**
+    Handles the submission of mathematical expressions.
+    Performs validation checks and error handling before sending the command.
+    Clears input and resets error state on successful submission.
+*/
   const handleSendAction = () => {
     const trimmedCommand = inputCommand.trim();
     const lastChar = trimmedCommand.slice(-1);
