@@ -6,10 +6,18 @@ import { sendUserCommand } from "../services/ChatInput.service.ts";
 import socket from "../services/Socket.service.ts";
 import "../styles/BotCalulator.css";
 
+/**
+ * Main component for the calculator application that handles socket communication,
+ * command processing, and history management.
+ */
 const BotCalculator: React.FC = () => {
   const [historyList, setHistoryList] = useState<IHistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
+  /**
+   * Handles socket events for new history items.
+   * Adds new calculations to the history list.
+   */
   useEffect(() => {
     const handleHistoryItem = (newItem: IHistoryItem) => {
       setHistoryList((oldList: IHistoryItem[]) => [newItem, ...oldList]);
@@ -21,6 +29,11 @@ const BotCalculator: React.FC = () => {
     };
   }, []);
 
+  /**
+   * Toggles history visibility and loads historical calculations.
+   * When showing history: loads and displays past calculations
+   * When hiding: clears history list and updates visibility state
+   */
   const handleLoadHistory = () => {
     if (!showHistory) {
       socket.emit("load_history");
@@ -40,6 +53,11 @@ const BotCalculator: React.FC = () => {
     }
   };
 
+  /**
+   * Processes user commands and updates history.
+   * Emits socket events for history updates
+   * Handles error cases
+   */
   const handleUserCommand = async (command: string) => {
     try {
       const result = await sendUserCommand(command);
